@@ -1,0 +1,52 @@
+dataset:
+  name: truthfulqa
+  source: huggingface
+  hf_path: truthful_qa
+  hf_subset: generation
+  # Use all 817 questions for publishable results
+  sample_size: 817
+  seed: 42
+
+models:
+  # Small (~3B), Medium (~7B), Large (~70B) for size comparison
+  experiment_models:
+    - provider: ollama
+      model_name: phi3:mini
+      size_class: small
+      temperature: 0.0
+      max_tokens: 256
+    - provider: ollama
+      model_name: mistral:7b
+      size_class: medium
+      temperature: 0.0
+      max_tokens: 256
+    - provider: ollama
+      model_name: llama3:70b
+      size_class: large
+      temperature: 0.0
+      max_tokens: 256
+
+  judge_model:
+    provider: ollama
+    model_name: mistral:7b
+    temperature: 0.0
+    max_tokens: 16
+
+prompt_templates:
+  - factual_direct
+  - strict_abstain
+  - chain_of_thought
+  - concise_factual
+
+evaluation:
+  evaluators:
+    - faithfulness
+    - correctness
+  repetitions_per_item: 1
+
+ollama:
+  base_url: http://localhost:11434/v1
+
+phoenix:
+  project_name: hallucination-reliability-study
+  port: 6006
