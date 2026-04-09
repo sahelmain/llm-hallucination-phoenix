@@ -3,17 +3,22 @@ dataset:
   source: huggingface
   hf_path: truthful_qa
   hf_subset: generation
+  # Legacy keys (used by run_round1_baseline.py and run_round2_matrix.py)
   round1_sample_size: 20
   round2_sample_size: 10
-  full_sample_size: 817
+  # Full study — all 817 questions required for publishability (Namin, 2026)
+  sample_size: 817
   seed: 42
 
 models:
+  # Legacy baseline (run_round1_baseline.py)
   baseline:
     provider: ollama
     model_name: llama3.2
     temperature: 0.0
     max_tokens: 256
+
+  # Legacy round 2 (run_round2_matrix.py)
   round2_models:
     - provider: ollama
       model_name: llama3.2
@@ -23,19 +28,30 @@ models:
       model_name: mistral
       temperature: 0.0
       max_tokens: 128
-  full_study_models:
+
+  # Full study — small / medium / large (run_experiment.py)
+  experiment_models:
     - provider: ollama
-      model_name: llama3.2
+      model_name: phi3:mini
+      size_class: small
       temperature: 0.0
-      max_tokens: 128
+      max_tokens: 256
     - provider: ollama
-      model_name: mistral
+      model_name: mistral:7b
+      size_class: medium
       temperature: 0.0
-      max_tokens: 128
+      max_tokens: 256
     - provider: ollama
       model_name: llama3.3:70b
+      size_class: large
       temperature: 0.0
-      max_tokens: 128
+      max_tokens: 256
+
+  judge_model:
+    provider: ollama
+    model_name: mistral:7b
+    temperature: 0.0
+    max_tokens: 16
 
 prompt_templates:
   baseline: factual_direct
@@ -50,8 +66,7 @@ prompt_templates:
 
 evaluation:
   method: deterministic_reference_scoring
-  repetitions_per_item: 3
-  full_study_repetitions_per_item: 1
+  repetitions_per_item: 1
   misconception:
     similarity_threshold: 0.72
 
@@ -64,6 +79,6 @@ phoenix:
 
 execution:
   full_study:
-    output_name: full_study_results.csv
-    max_workers: 4
-    checkpoint_every: 25
+    output_name: experiment_results.csv
+    max_workers: 8
+    checkpoint_every: 500

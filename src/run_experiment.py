@@ -111,7 +111,7 @@ def main():
     client = make_client(cfg)
 
     models = cfg["models"]["experiment_models"]
-    template_names = cfg["prompt_templates"]
+    template_names = cfg["prompt_templates"]["full_study"]
     n_reps = cfg["evaluation"]["repetitions_per_item"]
 
     df = get_truthfulqa(cfg)
