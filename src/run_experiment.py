@@ -131,14 +131,13 @@ def load_checkpoint(out_path):
         return set()
 
 
-def flush(buffer, out_path, lock, write_header):
-    """Append buffer contents to CSV output file."""
-    with lock:
-        if not buffer:
-            return
-        pd.DataFrame(buffer).to_csv(out_path, mode="a", header=write_header[0], index=False)
-        write_header[0] = False
-        buffer.clear()
+def flush(buffer, out_path, write_header):
+    """Append buffer contents to CSV output file. Must be called while lock is held."""
+    if not buffer:
+        return
+    pd.DataFrame(buffer).to_csv(out_path, mode="a", header=write_header[0], index=False)
+    write_header[0] = False
+    buffer.clear()
 
 
 def main():
@@ -199,10 +198,11 @@ def main():
                 buffer.append(result)
                 completed_count += 1
                 if completed_count % CHECKPOINT_EVERY == 0:
-                    flush(buffer, out_path, lock, write_header)
+                    flush(buffer, out_path, write_header)
 
     # Final flush for any remaining rows
-    flush(buffer, out_path, lock, write_header)
+    with lock:
+        flush(buffer, out_path, write_header)
 
     total_written = skipped + remaining
     print(f"\nDone. {total_written} total rows in {out_path}")
