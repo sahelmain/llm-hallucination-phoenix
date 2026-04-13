@@ -15,7 +15,7 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "experiment.yaml"
 DATA_DIR = ROOT / "data"
-NUM_WORKERS = 4
+NUM_WORKERS = 2
 
 FAITHFULNESS_TEMPLATE = """Determine if the model response is faithful to the known facts.
 
@@ -77,6 +77,7 @@ def judge_single(client, model_name, template, row_dict):
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
             max_tokens=16,
+            timeout=60,
         )
         return resp.choices[0].message.content
     except Exception as e:

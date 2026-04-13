@@ -1,7 +1,12 @@
-"""Full experiment runner — all 817 TruthfulQA questions, all models, all templates."""
+"""Full experiment runner — all 817 TruthfulQA questions, all models, all templates.
+
+Checkpoint/resume: results are flushed to disk every CHECKPOINT_EVERY completions.
+If the session disconnects, re-running will skip already-completed rows automatically.
+"""
 
 import json
 import sys
+import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
@@ -18,6 +23,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "experiment.yaml"
 DATA_DIR = ROOT / "data"
 NUM_WORKERS = 4
+CHECKPOINT_EVERY = 100  # flush to disk every N completed rows
 
 
 def load_config():
@@ -106,6 +112,35 @@ def execute_task(client, task):
     }
 
 
+def load_checkpoint(out_path):
+    """Return set of already-completed (model, template, item_id, prompt_type, rep) tuples."""
+    if not out_path.exists():
+        return set()
+    try:
+        existing = pd.read_csv(out_path)
+        if existing.empty:
+            return set()
+        return set(zip(
+            existing["model"],
+            existing["template"],
+            existing["item_id"].astype(str),
+            existing["prompt_type"],
+            existing["repetition"].astype(int),
+        ))
+    except Exception:
+        return set()
+
+
+def flush(buffer, out_path, lock, write_header):
+    """Append buffer contents to CSV output file."""
+    with lock:
+        if not buffer:
+            return
+        pd.DataFrame(buffer).to_csv(out_path, mode="a", header=write_header[0], index=False)
+        write_header[0] = False
+        buffer.clear()
+
+
 def main():
     cfg = load_config()
     client = make_client(cfg)
@@ -117,25 +152,60 @@ def main():
     df = get_truthfulqa(cfg)
     tasks = build_tasks(df, models, template_names, n_reps)
 
+    out_path = DATA_DIR / "experiment_results.csv"
+    done = load_checkpoint(out_path)
+
+    pending = [
+        t for t in tasks
+        if (
+            t["model_cfg"]["model_name"],
+            t["template_name"],
+            str(t["row"]["item_id"]),
+            t["prompt_type"],
+            t["rep"],
+        ) not in done
+    ]
+
     total_calls = len(tasks)
+    skipped = len(done)
+    remaining = len(pending)
+
     print(f"\nExperiment matrix:")
-    print(f"  Questions : {len(df)}")
-    print(f"  Models    : {len(models)} ({', '.join(m['model_name'] for m in models)})")
-    print(f"  Templates : {len(template_names)}")
+    print(f"  Questions   : {len(df)}")
+    print(f"  Models      : {len(models)} ({', '.join(m['model_name'] for m in models)})")
+    print(f"  Templates   : {len(template_names)}")
     print(f"  Prompt types: 2 (factual_clear, unclear)")
     print(f"  Repetitions : {n_reps}")
-    print(f"  Total calls : {total_calls}\n")
+    print(f"  Total calls : {total_calls}")
+    if skipped:
+        print(f"  Resuming    : {skipped} already done, {remaining} remaining\n")
+    else:
+        print()
 
-    results = []
+    if not pending:
+        print("All tasks already complete.")
+        return
+
+    lock = threading.Lock()
+    buffer = []
+    write_header = [not out_path.exists() or skipped == 0]
+    completed_count = 0
+
     with ThreadPoolExecutor(max_workers=NUM_WORKERS) as pool:
-        futures = {pool.submit(execute_task, client, t): t for t in tasks}
+        futures = {pool.submit(execute_task, client, t): t for t in pending}
         for future in tqdm(as_completed(futures), total=len(futures), desc="Generating"):
-            results.append(future.result())
+            result = future.result()
+            with lock:
+                buffer.append(result)
+                completed_count += 1
+                if completed_count % CHECKPOINT_EVERY == 0:
+                    flush(buffer, out_path, lock, write_header)
 
-    results_df = pd.DataFrame(results)
-    out_path = DATA_DIR / "experiment_results.csv"
-    results_df.to_csv(out_path, index=False)
-    print(f"\nDone. {len(results_df)} rows saved to {out_path}")
+    # Final flush for any remaining rows
+    flush(buffer, out_path, lock, write_header)
+
+    total_written = skipped + remaining
+    print(f"\nDone. {total_written} total rows in {out_path}")
 
 
 if __name__ == "__main__":
