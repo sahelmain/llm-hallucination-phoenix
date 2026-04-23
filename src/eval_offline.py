@@ -2,6 +2,7 @@
 
 import ast
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -15,14 +16,54 @@ DATA_DIR = ROOT / "data"
 def parse_answer_list(raw):
     if pd.isna(raw) or not raw:
         return []
+    raw_str = str(raw).strip()
+    # Numpy array string format: ['answer one' 'answer two'] (space-separated quoted strings, no commas)
+    # Must try this BEFORE ast.literal_eval — Python silently concatenates adjacent string literals
+    # inside a list, so ast.literal_eval(['a' 'b']) returns ['ab'] instead of ['a', 'b'].
+    if raw_str.startswith("[") and "', '" not in raw_str and '", "' not in raw_str:
+        matches = re.findall("'([^']+)'", raw_str)
+        if len(matches) > 1:
+            return [m.strip() for m in matches if m.strip()]
+    # Standard comma-separated Python list
     try:
-        return ast.literal_eval(raw)
+        result = ast.literal_eval(raw_str)
+        if isinstance(result, (list, tuple)):
+            return [str(s).strip() for s in result if str(s).strip()]
     except Exception:
-        return [s.strip() for s in str(raw).split(";") if s.strip()]
+        pass
+    # Fallback: semicolon-separated
+    return [s.strip() for s in raw_str.split(";") if s.strip()]
+
+
+STOPWORDS = {
+    "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "shall", "can", "to", "of", "in", "on",
+    "at", "by", "for", "with", "about", "as", "into", "through", "and",
+    "or", "but", "if", "that", "this", "it", "its", "your", "their",
+    "you", "they", "we", "i", "he", "she", "not", "no", "from", "than",
+    "more", "also", "up", "out", "so", "what", "which", "who", "when",
+    "where", "how", "why", "all", "both", "each", "few", "some", "any",
+}
+WORD_OVERLAP_THRESHOLD = 0.3   # fraction of reference content words that must appear in output
 
 
 def normalize(text):
     return str(text).strip().lower().rstrip(".")
+
+
+def content_words(text):
+    words = re.findall(r"[a-z0-9]+", normalize(text))
+    return [w for w in words if w not in STOPWORDS]
+
+
+def word_overlap(reference, output_text):
+    """Fraction of content words in reference that appear in output_text."""
+    ref_words = content_words(reference)
+    if not ref_words:
+        return 0.0
+    out_words = set(content_words(output_text))
+    return sum(1 for w in ref_words if w in out_words) / len(ref_words)
 
 
 def judge_row(row):
@@ -31,17 +72,21 @@ def judge_row(row):
     correct_list = parse_answer_list(row.get("correct_answers", ""))
     incorrect_list = parse_answer_list(row.get("incorrect_answers", ""))
 
-    if not output or output in ("i'm not sure", "i'm not sure", "i don't know"):
+    if not output or output in ("i'm not sure", "i don't know"):
         has_correct = len(correct_list) > 0 or bool(best)
         return ("unfaithful" if has_correct else "faithful",
                 "incorrect" if has_correct else "correct")
 
+    # Incorrect answer check — exact substring match (these are specific wrong facts)
     for inc in incorrect_list:
-        if normalize(inc) in output or output in normalize(inc):
+        ninc = normalize(inc)
+        if ninc in output or output in ninc:
             return "unfaithful", "incorrect"
 
-    for cor in correct_list:
-        if normalize(cor) in output or output in normalize(cor):
+    # Correct answer check — word overlap (handles paraphrasing)
+    all_correct = correct_list + ([best] if best else [])
+    for cor in all_correct:
+        if word_overlap(cor, output) >= WORD_OVERLAP_THRESHOLD:
             return "faithful", "correct"
 
     if best in output or output in best:
@@ -78,9 +123,24 @@ def output_consistency(group):
 
 
 def main():
-    r2_path = DATA_DIR / "round2_results.csv"
-    df = pd.read_csv(r2_path)
-    print(f"Loaded {len(df)} rows from {r2_path}")
+    # Prefer the full study file; fall back to round2 for local testing
+    full_path = DATA_DIR / "experiment_results.csv"
+    r2_path   = DATA_DIR / "round2_results.csv"
+
+    if full_path.exists():
+        in_path  = full_path
+        out_path = DATA_DIR / "evaluated_results.csv"
+    elif r2_path.exists():
+        in_path  = r2_path
+        out_path = DATA_DIR / "evaluated_results_round2.csv"
+    else:
+        print("ERROR: neither experiment_results.csv nor round2_results.csv found in data/")
+        print("Download experiment_results.csv from Google Drive and place it in data/")
+        return
+
+    df = pd.read_csv(in_path)
+    print(f"Loaded {len(df)} rows from {in_path}")
+    print("Scoring deterministically (no LLM judge)...")
 
     results = df.apply(judge_row, axis=1, result_type="expand")
     df["faithfulness"] = results[0]
@@ -88,9 +148,8 @@ def main():
     df["hallucinated"] = (df["faithfulness"] == "unfaithful").astype(int)
     df["accurate"] = (df["correctness"] == "correct").astype(int)
 
-    scored_path = DATA_DIR / "evaluated_results_round2.csv"
-    df.to_csv(scored_path, index=False)
-    print(f"Scored results saved to {scored_path}")
+    df.to_csv(out_path, index=False)
+    print(f"Scored results saved to {out_path}")
 
     metrics = {}
 
