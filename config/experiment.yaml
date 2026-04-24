@@ -32,11 +32,23 @@ models:
   # Full study — small / medium / large (run_experiment.py)
   experiment_models:
     - provider: ollama
-      model_name: llama3.3:70b
-      size_class: extra_large
+      model_name: phi3:mini
+      size_class: small
+      temperature: 0.0
+      max_tokens: 256
+    - provider: ollama
+      model_name: mistral:7b
+      size_class: medium
+      temperature: 0.0
+      max_tokens: 256
+    - provider: ollama
+      model_name: llama3:8b
+      size_class: large
       temperature: 0.0
       max_tokens: 256
 
+  # Optional appendix-only setting retained for non-paper experiments.
+  # The reported latest run used deterministic reference scoring only.
   judge_model:
     provider: ollama
     model_name: mistral:7b
@@ -69,6 +81,6 @@ phoenix:
 
 execution:
   full_study:
-    output_name: experiment_results.csv
+    output_name: experiment_results_latest_19608.csv
     max_workers: 8
     checkpoint_every: 500

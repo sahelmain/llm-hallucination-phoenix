@@ -1,0 +1,26 @@
+{
+  "threshold": 0.3,
+  "rows": 19608,
+  "branches": {
+    "correct_word_overlap": {
+      "rows": 13562,
+      "share": 0.691656466748266
+    },
+    "default_no_match": {
+      "rows": 3498,
+      "share": 0.1783965728274174
+    },
+    "incorrect_substring": {
+      "rows": 1793,
+      "share": 0.0914422684618523
+    },
+    "abstention": {
+      "rows": 681,
+      "share": 0.034730722154222765
+    },
+    "best_substring_fallback": {
+      "rows": 74,
+      "share": 0.003773969808241534
+    }
+  }
+}

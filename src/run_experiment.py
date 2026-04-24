@@ -4,6 +4,7 @@ Checkpoint/resume: results are flushed to disk every CHECKPOINT_EVERY completion
 If the session disconnects, re-running will skip already-completed rows automatically.
 """
 
+import argparse
 import json
 import sys
 import threading
@@ -24,6 +25,16 @@ CONFIG_PATH = ROOT / "config" / "experiment.yaml"
 DATA_DIR = ROOT / "data"
 NUM_WORKERS = 4
 CHECKPOINT_EVERY = 100  # flush to disk every N completed rows
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--output-name",
+        default=None,
+        help="Override the configured output filename for raw generations.",
+    )
+    return parser.parse_args()
 
 
 def load_config():
@@ -141,17 +152,21 @@ def flush(buffer, out_path, write_header):
 
 
 def main():
+    args = parse_args()
     cfg = load_config()
     client = make_client(cfg)
 
     models = cfg["models"]["experiment_models"]
     template_names = cfg["prompt_templates"]["full_study"]
     n_reps = cfg["evaluation"]["repetitions_per_item"]
+    execution_cfg = cfg.get("execution", {}).get("full_study", {})
+    output_name = args.output_name or execution_cfg.get("output_name", "experiment_results.csv")
+    max_workers = execution_cfg.get("max_workers", NUM_WORKERS)
 
     df = get_truthfulqa(cfg)
     tasks = build_tasks(df, models, template_names, n_reps)
 
-    out_path = DATA_DIR / "experiment_results.csv"
+    out_path = DATA_DIR / output_name
     done = load_checkpoint(out_path)
 
     pending = [
@@ -190,7 +205,7 @@ def main():
     write_header = [not out_path.exists() or skipped == 0]
     completed_count = 0
 
-    with ThreadPoolExecutor(max_workers=NUM_WORKERS) as pool:
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {pool.submit(execute_task, client, t): t for t in pending}
         for future in tqdm(as_completed(futures), total=len(futures), desc="Generating"):
             result = future.result()

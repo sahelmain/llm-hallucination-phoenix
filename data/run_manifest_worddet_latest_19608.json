@@ -1,0 +1,41 @@
+{
+  "input_path": "/tmp/new-scorer-run/data/evaluated_results.csv",
+  "scoring_mode": "existing_labels",
+  "ci_method": "wilson_95",
+  "rows": 19608,
+  "unique_items": 817,
+  "categories": 38,
+  "models": [
+    "llama3:8b",
+    "mistral:7b",
+    "phi3:mini"
+  ],
+  "templates": [
+    "chain_of_thought",
+    "concise_factual",
+    "factual_direct",
+    "strict_abstain"
+  ],
+  "prompt_types": [
+    "factual_clear",
+    "unclear"
+  ],
+  "repetition_values": [
+    0
+  ],
+  "repetitions_per_item": 1,
+  "expected_rows": 19608,
+  "coverage_complete": true,
+  "generation_errors": 0,
+  "generated_files": [
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/evaluated_results_worddet_latest_19608.csv",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/metrics_worddet_latest_19608.json",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/category_metrics_worddet_latest_19608.csv",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/category_model_metrics_worddet_latest_19608.csv",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/model_template_metrics_worddet_latest_19608.csv",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/paired_comparisons_worddet_latest_19608.json",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/paired_comparisons_by_category_worddet_latest_19608.json",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/category_rank_correlations_worddet_latest_19608.json",
+    "/Users/sahelazzam/SOFTWARECOURSE/project1/data/category_rank_consistency_worddet_latest_19608.json"
+  ]
+}

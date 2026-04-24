@@ -1,0 +1,20 @@
+{
+  "llama3:8b vs mistral:7b": {
+    "spearman_rho": 0.5197833062752617,
+    "spearman_p_value": 0.0008241851263402867,
+    "top5_overlap": 4,
+    "top10_overlap": 5
+  },
+  "llama3:8b vs phi3:mini": {
+    "spearman_rho": 0.47740453003610894,
+    "spearman_p_value": 0.0024385317363361534,
+    "top5_overlap": 4,
+    "top10_overlap": 5
+  },
+  "mistral:7b vs phi3:mini": {
+    "spearman_rho": 0.7285065669758143,
+    "spearman_p_value": 2.1601475295346755e-07,
+    "top5_overlap": 4,
+    "top10_overlap": 8
+  }
+}

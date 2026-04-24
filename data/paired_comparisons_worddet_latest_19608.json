@@ -1,0 +1,35 @@
+{
+  "phi3:mini vs mistral:7b": {
+    "chi2": 613.0796160361377,
+    "p_value": 0.0,
+    "exact_p_value": 2.4055709078377928e-144,
+    "b": 364,
+    "c": 1407,
+    "n_shared": 6536,
+    "accuracy_a": 0.6355569155446756,
+    "accuracy_b": 0.7951346389228886,
+    "significant_at_0_005": true
+  },
+  "phi3:mini vs llama3:8b": {
+    "chi2": 8.329226219812716,
+    "p_value": 0.003901227136688501,
+    "exact_p_value": 0.003890456237016181,
+    "b": 949,
+    "c": 1080,
+    "n_shared": 6536,
+    "accuracy_a": 0.6355569155446756,
+    "accuracy_b": 0.6555997552019583,
+    "significant_at_0_005": true
+  },
+  "mistral:7b vs llama3:8b": {
+    "chi2": 461.58008898776416,
+    "p_value": 0.0,
+    "exact_p_value": 3.442624744080748e-107,
+    "b": 1355,
+    "c": 443,
+    "n_shared": 6536,
+    "accuracy_a": 0.7951346389228886,
+    "accuracy_b": 0.6555997552019583,
+    "significant_at_0_005": true
+  }
+}

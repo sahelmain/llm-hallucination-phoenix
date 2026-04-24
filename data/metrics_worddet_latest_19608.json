@@ -1,0 +1,1447 @@
+{
+  "hallucination_rate": {
+    "value": 0.30456956344349245,
+    "ci_95": [
+      0.2981665280157177,
+      0.3110491613461624
+    ]
+  },
+  "accuracy": {
+    "value": 0.6954304365565076,
+    "ci_95": [
+      0.6889508386538377,
+      0.7018334719842823
+    ]
+  },
+  "by_model": {
+    "llama3:8b": {
+      "hallucination_rate": {
+        "value": 0.3444002447980416,
+        "ci_95": [
+          0.33297470251176475,
+          0.3560085902945931
+        ]
+      },
+      "accuracy": {
+        "value": 0.6555997552019583,
+        "ci_95": [
+          0.6439914097054069,
+          0.6670252974882351
+        ]
+      },
+      "size_class": "large",
+      "n": 6536
+    },
+    "mistral:7b": {
+      "hallucination_rate": {
+        "value": 0.2048653610771114,
+        "ci_95": [
+          0.19525520485461206,
+          0.21482225023237356
+        ]
+      },
+      "accuracy": {
+        "value": 0.7951346389228886,
+        "ci_95": [
+          0.7851777497676264,
+          0.8047447951453879
+        ]
+      },
+      "size_class": "medium",
+      "n": 6536
+    },
+    "phi3:mini": {
+      "hallucination_rate": {
+        "value": 0.36444308445532436,
+        "ci_95": [
+          0.35285798350579745,
+          0.3761874416922685
+        ]
+      },
+      "accuracy": {
+        "value": 0.6355569155446756,
+        "ci_95": [
+          0.6238125583077314,
+          0.6471420164942026
+        ]
+      },
+      "size_class": "small",
+      "n": 6536
+    }
+  },
+  "by_size_class": {
+    "large": {
+      "hallucination_rate": 0.3444002447980416,
+      "accuracy": 0.6555997552019583,
+      "n": 6536
+    },
+    "medium": {
+      "hallucination_rate": 0.2048653610771114,
+      "accuracy": 0.7951346389228886,
+      "n": 6536
+    },
+    "small": {
+      "hallucination_rate": 0.36444308445532436,
+      "accuracy": 0.6355569155446756,
+      "n": 6536
+    }
+  },
+  "by_template": {
+    "chain_of_thought": {
+      "hallucination_rate": 0.14116687066503467,
+      "accuracy": 0.8588331293349654,
+      "n": 4902
+    },
+    "concise_factual": {
+      "hallucination_rate": 0.48592411260709917,
+      "accuracy": 0.5140758873929009,
+      "n": 4902
+    },
+    "factual_direct": {
+      "hallucination_rate": 0.3088535291717666,
+      "accuracy": 0.6911464708282333,
+      "n": 4902
+    },
+    "strict_abstain": {
+      "hallucination_rate": 0.28233374133006933,
+      "accuracy": 0.7176662586699306,
+      "n": 4902
+    }
+  },
+  "by_prompt_type": {
+    "factual_clear": {
+      "hallucination_rate": 0.32894736842105265,
+      "accuracy": 0.6710526315789473,
+      "n": 9804
+    },
+    "unclear": {
+      "hallucination_rate": 0.28019175846593225,
+      "accuracy": 0.7198082415340677,
+      "n": 9804
+    }
+  },
+  "by_category": {
+    "Advertising": {
+      "hallucination_rate": 0.3269230769230769,
+      "accuracy": 0.6730769230769231,
+      "n_questions": 13,
+      "n_rows": 312
+    },
+    "Confusion: Other": {
+      "hallucination_rate": 0.7604166666666666,
+      "accuracy": 0.23958333333333334,
+      "n_questions": 8,
+      "n_rows": 192
+    },
+    "Confusion: People": {
+      "hallucination_rate": 0.8115942028985508,
+      "accuracy": 0.18840579710144928,
+      "n_questions": 23,
+      "n_rows": 552
+    },
+    "Confusion: Places": {
+      "hallucination_rate": 0.43333333333333335,
+      "accuracy": 0.5666666666666667,
+      "n_questions": 15,
+      "n_rows": 360
+    },
+    "Conspiracies": {
+      "hallucination_rate": 0.15166666666666667,
+      "accuracy": 0.8483333333333334,
+      "n_questions": 25,
+      "n_rows": 600
+    },
+    "Distraction": {
+      "hallucination_rate": 0.38095238095238093,
+      "accuracy": 0.6190476190476191,
+      "n_questions": 14,
+      "n_rows": 336
+    },
+    "Economics": {
+      "hallucination_rate": 0.30376344086021506,
+      "accuracy": 0.696236559139785,
+      "n_questions": 31,
+      "n_rows": 744
+    },
+    "Education": {
+      "hallucination_rate": 0.2125,
+      "accuracy": 0.7875,
+      "n_questions": 10,
+      "n_rows": 240
+    },
+    "Fiction": {
+      "hallucination_rate": 0.3375,
+      "accuracy": 0.6625,
+      "n_questions": 30,
+      "n_rows": 720
+    },
+    "Finance": {
+      "hallucination_rate": 0.35185185185185186,
+      "accuracy": 0.6481481481481481,
+      "n_questions": 9,
+      "n_rows": 216
+    },
+    "Health": {
+      "hallucination_rate": 0.2734848484848485,
+      "accuracy": 0.7265151515151516,
+      "n_questions": 55,
+      "n_rows": 1320
+    },
+    "History": {
+      "hallucination_rate": 0.2152777777777778,
+      "accuracy": 0.7847222222222222,
+      "n_questions": 24,
+      "n_rows": 576
+    },
+    "Indexical Error: Identity": {
+      "hallucination_rate": 0.25,
+      "accuracy": 0.75,
+      "n_questions": 9,
+      "n_rows": 216
+    },
+    "Indexical Error: Location": {
+      "hallucination_rate": 0.2727272727272727,
+      "accuracy": 0.7272727272727273,
+      "n_questions": 11,
+      "n_rows": 264
+    },
+    "Indexical Error: Other": {
+      "hallucination_rate": 0.5317460317460317,
+      "accuracy": 0.46825396825396826,
+      "n_questions": 21,
+      "n_rows": 504
+    },
+    "Indexical Error: Time": {
+      "hallucination_rate": 0.359375,
+      "accuracy": 0.640625,
+      "n_questions": 16,
+      "n_rows": 384
+    },
+    "Language": {
+      "hallucination_rate": 0.17261904761904762,
+      "accuracy": 0.8273809523809523,
+      "n_questions": 21,
+      "n_rows": 504
+    },
+    "Law": {
+      "hallucination_rate": 0.2740885416666667,
+      "accuracy": 0.7259114583333334,
+      "n_questions": 64,
+      "n_rows": 1536
+    },
+    "Logical Falsehood": {
+      "hallucination_rate": 0.08928571428571429,
+      "accuracy": 0.9107142857142857,
+      "n_questions": 14,
+      "n_rows": 336
+    },
+    "Mandela Effect": {
+      "hallucination_rate": 0.14583333333333334,
+      "accuracy": 0.8541666666666666,
+      "n_questions": 6,
+      "n_rows": 144
+    },
+    "Misconceptions": {
+      "hallucination_rate": 0.19125,
+      "accuracy": 0.80875,
+      "n_questions": 100,
+      "n_rows": 2400
+    },
+    "Misconceptions: Topical": {
+      "hallucination_rate": 0.19791666666666666,
+      "accuracy": 0.8020833333333334,
+      "n_questions": 4,
+      "n_rows": 96
+    },
+    "Misinformation": {
+      "hallucination_rate": 0.5798611111111112,
+      "accuracy": 0.4201388888888889,
+      "n_questions": 12,
+      "n_rows": 288
+    },
+    "Misquotations": {
+      "hallucination_rate": 0.2552083333333333,
+      "accuracy": 0.7447916666666666,
+      "n_questions": 16,
+      "n_rows": 384
+    },
+    "Myths and Fairytales": {
+      "hallucination_rate": 0.30158730158730157,
+      "accuracy": 0.6984126984126984,
+      "n_questions": 21,
+      "n_rows": 504
+    },
+    "Nutrition": {
+      "hallucination_rate": 0.11979166666666667,
+      "accuracy": 0.8802083333333334,
+      "n_questions": 16,
+      "n_rows": 384
+    },
+    "Paranormal": {
+      "hallucination_rate": 0.28685897435897434,
+      "accuracy": 0.7131410256410257,
+      "n_questions": 26,
+      "n_rows": 624
+    },
+    "Politics": {
+      "hallucination_rate": 0.21666666666666667,
+      "accuracy": 0.7833333333333333,
+      "n_questions": 10,
+      "n_rows": 240
+    },
+    "Proverbs": {
+      "hallucination_rate": 0.28935185185185186,
+      "accuracy": 0.7106481481481481,
+      "n_questions": 18,
+      "n_rows": 432
+    },
+    "Psychology": {
+      "hallucination_rate": 0.34868421052631576,
+      "accuracy": 0.6513157894736842,
+      "n_questions": 19,
+      "n_rows": 456
+    },
+    "Religion": {
+      "hallucination_rate": 0.33055555555555555,
+      "accuracy": 0.6694444444444444,
+      "n_questions": 15,
+      "n_rows": 360
+    },
+    "Science": {
+      "hallucination_rate": 0.6064814814814815,
+      "accuracy": 0.39351851851851855,
+      "n_questions": 9,
+      "n_rows": 216
+    },
+    "Sociology": {
+      "hallucination_rate": 0.40075757575757576,
+      "accuracy": 0.5992424242424242,
+      "n_questions": 55,
+      "n_rows": 1320
+    },
+    "Statistics": {
+      "hallucination_rate": 0.24166666666666667,
+      "accuracy": 0.7583333333333333,
+      "n_questions": 5,
+      "n_rows": 120
+    },
+    "Stereotypes": {
+      "hallucination_rate": 0.3402777777777778,
+      "accuracy": 0.6597222222222222,
+      "n_questions": 24,
+      "n_rows": 576
+    },
+    "Subjective": {
+      "hallucination_rate": 0.3148148148148148,
+      "accuracy": 0.6851851851851852,
+      "n_questions": 9,
+      "n_rows": 216
+    },
+    "Superstitions": {
+      "hallucination_rate": 0.23106060606060605,
+      "accuracy": 0.7689393939393939,
+      "n_questions": 22,
+      "n_rows": 528
+    },
+    "Weather": {
+      "hallucination_rate": 0.19362745098039216,
+      "accuracy": 0.8063725490196079,
+      "n_questions": 17,
+      "n_rows": 408
+    }
+  },
+  "by_category_model": {
+    "Advertising|llama3:8b": {
+      "category": "Advertising",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.40384615384615385,
+      "accuracy": 0.5961538461538461,
+      "n_rows": 104
+    },
+    "Advertising|mistral:7b": {
+      "category": "Advertising",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.14423076923076922,
+      "accuracy": 0.8557692307692307,
+      "n_rows": 104
+    },
+    "Advertising|phi3:mini": {
+      "category": "Advertising",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.4326923076923077,
+      "accuracy": 0.5673076923076923,
+      "n_rows": 104
+    },
+    "Confusion: Other|llama3:8b": {
+      "category": "Confusion: Other",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.6875,
+      "accuracy": 0.3125,
+      "n_rows": 64
+    },
+    "Confusion: Other|mistral:7b": {
+      "category": "Confusion: Other",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.828125,
+      "accuracy": 0.171875,
+      "n_rows": 64
+    },
+    "Confusion: Other|phi3:mini": {
+      "category": "Confusion: Other",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.765625,
+      "accuracy": 0.234375,
+      "n_rows": 64
+    },
+    "Confusion: People|llama3:8b": {
+      "category": "Confusion: People",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.8315217391304348,
+      "accuracy": 0.16847826086956522,
+      "n_rows": 184
+    },
+    "Confusion: People|mistral:7b": {
+      "category": "Confusion: People",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.7608695652173914,
+      "accuracy": 0.2391304347826087,
+      "n_rows": 184
+    },
+    "Confusion: People|phi3:mini": {
+      "category": "Confusion: People",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.842391304347826,
+      "accuracy": 0.15760869565217392,
+      "n_rows": 184
+    },
+    "Confusion: Places|llama3:8b": {
+      "category": "Confusion: Places",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.4,
+      "accuracy": 0.6,
+      "n_rows": 120
+    },
+    "Confusion: Places|mistral:7b": {
+      "category": "Confusion: Places",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.4666666666666667,
+      "accuracy": 0.5333333333333333,
+      "n_rows": 120
+    },
+    "Confusion: Places|phi3:mini": {
+      "category": "Confusion: Places",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.43333333333333335,
+      "accuracy": 0.5666666666666667,
+      "n_rows": 120
+    },
+    "Conspiracies|llama3:8b": {
+      "category": "Conspiracies",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.26,
+      "accuracy": 0.74,
+      "n_rows": 200
+    },
+    "Conspiracies|mistral:7b": {
+      "category": "Conspiracies",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.05,
+      "accuracy": 0.95,
+      "n_rows": 200
+    },
+    "Conspiracies|phi3:mini": {
+      "category": "Conspiracies",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.145,
+      "accuracy": 0.855,
+      "n_rows": 200
+    },
+    "Distraction|llama3:8b": {
+      "category": "Distraction",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.26785714285714285,
+      "accuracy": 0.7321428571428571,
+      "n_rows": 112
+    },
+    "Distraction|mistral:7b": {
+      "category": "Distraction",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.26785714285714285,
+      "accuracy": 0.7321428571428571,
+      "n_rows": 112
+    },
+    "Distraction|phi3:mini": {
+      "category": "Distraction",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.6071428571428571,
+      "accuracy": 0.39285714285714285,
+      "n_rows": 112
+    },
+    "Economics|llama3:8b": {
+      "category": "Economics",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.24596774193548387,
+      "accuracy": 0.7540322580645161,
+      "n_rows": 248
+    },
+    "Economics|mistral:7b": {
+      "category": "Economics",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.24596774193548387,
+      "accuracy": 0.7540322580645161,
+      "n_rows": 248
+    },
+    "Economics|phi3:mini": {
+      "category": "Economics",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.41935483870967744,
+      "accuracy": 0.5806451612903226,
+      "n_rows": 248
+    },
+    "Education|llama3:8b": {
+      "category": "Education",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.275,
+      "accuracy": 0.725,
+      "n_rows": 80
+    },
+    "Education|mistral:7b": {
+      "category": "Education",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.0125,
+      "accuracy": 0.9875,
+      "n_rows": 80
+    },
+    "Education|phi3:mini": {
+      "category": "Education",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.35,
+      "accuracy": 0.65,
+      "n_rows": 80
+    },
+    "Fiction|llama3:8b": {
+      "category": "Fiction",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.5416666666666666,
+      "accuracy": 0.4583333333333333,
+      "n_rows": 240
+    },
+    "Fiction|mistral:7b": {
+      "category": "Fiction",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.18333333333333332,
+      "accuracy": 0.8166666666666667,
+      "n_rows": 240
+    },
+    "Fiction|phi3:mini": {
+      "category": "Fiction",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.2875,
+      "accuracy": 0.7125,
+      "n_rows": 240
+    },
+    "Finance|llama3:8b": {
+      "category": "Finance",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.4722222222222222,
+      "accuracy": 0.5277777777777778,
+      "n_rows": 72
+    },
+    "Finance|mistral:7b": {
+      "category": "Finance",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.20833333333333334,
+      "accuracy": 0.7916666666666666,
+      "n_rows": 72
+    },
+    "Finance|phi3:mini": {
+      "category": "Finance",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.375,
+      "accuracy": 0.625,
+      "n_rows": 72
+    },
+    "Health|llama3:8b": {
+      "category": "Health",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.32954545454545453,
+      "accuracy": 0.6704545454545454,
+      "n_rows": 440
+    },
+    "Health|mistral:7b": {
+      "category": "Health",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.16363636363636364,
+      "accuracy": 0.8363636363636363,
+      "n_rows": 440
+    },
+    "Health|phi3:mini": {
+      "category": "Health",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.32727272727272727,
+      "accuracy": 0.6727272727272727,
+      "n_rows": 440
+    },
+    "History|llama3:8b": {
+      "category": "History",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.17708333333333334,
+      "accuracy": 0.8229166666666666,
+      "n_rows": 192
+    },
+    "History|mistral:7b": {
+      "category": "History",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.125,
+      "accuracy": 0.875,
+      "n_rows": 192
+    },
+    "History|phi3:mini": {
+      "category": "History",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.34375,
+      "accuracy": 0.65625,
+      "n_rows": 192
+    },
+    "Indexical Error: Identity|llama3:8b": {
+      "category": "Indexical Error: Identity",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.3472222222222222,
+      "accuracy": 0.6527777777777778,
+      "n_rows": 72
+    },
+    "Indexical Error: Identity|mistral:7b": {
+      "category": "Indexical Error: Identity",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.125,
+      "accuracy": 0.875,
+      "n_rows": 72
+    },
+    "Indexical Error: Identity|phi3:mini": {
+      "category": "Indexical Error: Identity",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.2777777777777778,
+      "accuracy": 0.7222222222222222,
+      "n_rows": 72
+    },
+    "Indexical Error: Location|llama3:8b": {
+      "category": "Indexical Error: Location",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.36363636363636365,
+      "accuracy": 0.6363636363636364,
+      "n_rows": 88
+    },
+    "Indexical Error: Location|mistral:7b": {
+      "category": "Indexical Error: Location",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.19318181818181818,
+      "accuracy": 0.8068181818181818,
+      "n_rows": 88
+    },
+    "Indexical Error: Location|phi3:mini": {
+      "category": "Indexical Error: Location",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.26136363636363635,
+      "accuracy": 0.7386363636363636,
+      "n_rows": 88
+    },
+    "Indexical Error: Other|llama3:8b": {
+      "category": "Indexical Error: Other",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.5238095238095238,
+      "accuracy": 0.47619047619047616,
+      "n_rows": 168
+    },
+    "Indexical Error: Other|mistral:7b": {
+      "category": "Indexical Error: Other",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.49404761904761907,
+      "accuracy": 0.5059523809523809,
+      "n_rows": 168
+    },
+    "Indexical Error: Other|phi3:mini": {
+      "category": "Indexical Error: Other",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.5773809523809523,
+      "accuracy": 0.4226190476190476,
+      "n_rows": 168
+    },
+    "Indexical Error: Time|llama3:8b": {
+      "category": "Indexical Error: Time",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.34375,
+      "accuracy": 0.65625,
+      "n_rows": 128
+    },
+    "Indexical Error: Time|mistral:7b": {
+      "category": "Indexical Error: Time",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.3515625,
+      "accuracy": 0.6484375,
+      "n_rows": 128
+    },
+    "Indexical Error: Time|phi3:mini": {
+      "category": "Indexical Error: Time",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.3828125,
+      "accuracy": 0.6171875,
+      "n_rows": 128
+    },
+    "Language|llama3:8b": {
+      "category": "Language",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.22023809523809523,
+      "accuracy": 0.7797619047619048,
+      "n_rows": 168
+    },
+    "Language|mistral:7b": {
+      "category": "Language",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.08928571428571429,
+      "accuracy": 0.9107142857142857,
+      "n_rows": 168
+    },
+    "Language|phi3:mini": {
+      "category": "Language",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.20833333333333334,
+      "accuracy": 0.7916666666666666,
+      "n_rows": 168
+    },
+    "Law|llama3:8b": {
+      "category": "Law",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.244140625,
+      "accuracy": 0.755859375,
+      "n_rows": 512
+    },
+    "Law|mistral:7b": {
+      "category": "Law",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.1875,
+      "accuracy": 0.8125,
+      "n_rows": 512
+    },
+    "Law|phi3:mini": {
+      "category": "Law",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.390625,
+      "accuracy": 0.609375,
+      "n_rows": 512
+    },
+    "Logical Falsehood|llama3:8b": {
+      "category": "Logical Falsehood",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.15178571428571427,
+      "accuracy": 0.8482142857142857,
+      "n_rows": 112
+    },
+    "Logical Falsehood|mistral:7b": {
+      "category": "Logical Falsehood",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.008928571428571428,
+      "accuracy": 0.9910714285714286,
+      "n_rows": 112
+    },
+    "Logical Falsehood|phi3:mini": {
+      "category": "Logical Falsehood",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.10714285714285714,
+      "accuracy": 0.8928571428571429,
+      "n_rows": 112
+    },
+    "Mandela Effect|llama3:8b": {
+      "category": "Mandela Effect",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.14583333333333334,
+      "accuracy": 0.8541666666666666,
+      "n_rows": 48
+    },
+    "Mandela Effect|mistral:7b": {
+      "category": "Mandela Effect",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.0625,
+      "accuracy": 0.9375,
+      "n_rows": 48
+    },
+    "Mandela Effect|phi3:mini": {
+      "category": "Mandela Effect",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.22916666666666666,
+      "accuracy": 0.7708333333333334,
+      "n_rows": 48
+    },
+    "Misconceptions|llama3:8b": {
+      "category": "Misconceptions",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.2025,
+      "accuracy": 0.7975,
+      "n_rows": 800
+    },
+    "Misconceptions|mistral:7b": {
+      "category": "Misconceptions",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.1275,
+      "accuracy": 0.8725,
+      "n_rows": 800
+    },
+    "Misconceptions|phi3:mini": {
+      "category": "Misconceptions",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.24375,
+      "accuracy": 0.75625,
+      "n_rows": 800
+    },
+    "Misconceptions: Topical|llama3:8b": {
+      "category": "Misconceptions: Topical",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.40625,
+      "accuracy": 0.59375,
+      "n_rows": 32
+    },
+    "Misconceptions: Topical|mistral:7b": {
+      "category": "Misconceptions: Topical",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.0,
+      "accuracy": 1.0,
+      "n_rows": 32
+    },
+    "Misconceptions: Topical|phi3:mini": {
+      "category": "Misconceptions: Topical",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.1875,
+      "accuracy": 0.8125,
+      "n_rows": 32
+    },
+    "Misinformation|llama3:8b": {
+      "category": "Misinformation",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.59375,
+      "accuracy": 0.40625,
+      "n_rows": 96
+    },
+    "Misinformation|mistral:7b": {
+      "category": "Misinformation",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.46875,
+      "accuracy": 0.53125,
+      "n_rows": 96
+    },
+    "Misinformation|phi3:mini": {
+      "category": "Misinformation",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.6770833333333334,
+      "accuracy": 0.3229166666666667,
+      "n_rows": 96
+    },
+    "Misquotations|llama3:8b": {
+      "category": "Misquotations",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.2109375,
+      "accuracy": 0.7890625,
+      "n_rows": 128
+    },
+    "Misquotations|mistral:7b": {
+      "category": "Misquotations",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.140625,
+      "accuracy": 0.859375,
+      "n_rows": 128
+    },
+    "Misquotations|phi3:mini": {
+      "category": "Misquotations",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.4140625,
+      "accuracy": 0.5859375,
+      "n_rows": 128
+    },
+    "Myths and Fairytales|llama3:8b": {
+      "category": "Myths and Fairytales",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.47619047619047616,
+      "accuracy": 0.5238095238095238,
+      "n_rows": 168
+    },
+    "Myths and Fairytales|mistral:7b": {
+      "category": "Myths and Fairytales",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.1488095238095238,
+      "accuracy": 0.8511904761904762,
+      "n_rows": 168
+    },
+    "Myths and Fairytales|phi3:mini": {
+      "category": "Myths and Fairytales",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.27976190476190477,
+      "accuracy": 0.7202380952380952,
+      "n_rows": 168
+    },
+    "Nutrition|llama3:8b": {
+      "category": "Nutrition",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.2265625,
+      "accuracy": 0.7734375,
+      "n_rows": 128
+    },
+    "Nutrition|mistral:7b": {
+      "category": "Nutrition",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.0234375,
+      "accuracy": 0.9765625,
+      "n_rows": 128
+    },
+    "Nutrition|phi3:mini": {
+      "category": "Nutrition",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.109375,
+      "accuracy": 0.890625,
+      "n_rows": 128
+    },
+    "Paranormal|llama3:8b": {
+      "category": "Paranormal",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.3894230769230769,
+      "accuracy": 0.6105769230769231,
+      "n_rows": 208
+    },
+    "Paranormal|mistral:7b": {
+      "category": "Paranormal",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.12980769230769232,
+      "accuracy": 0.8701923076923077,
+      "n_rows": 208
+    },
+    "Paranormal|phi3:mini": {
+      "category": "Paranormal",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.34134615384615385,
+      "accuracy": 0.6586538461538461,
+      "n_rows": 208
+    },
+    "Politics|llama3:8b": {
+      "category": "Politics",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.4625,
+      "accuracy": 0.5375,
+      "n_rows": 80
+    },
+    "Politics|mistral:7b": {
+      "category": "Politics",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.075,
+      "accuracy": 0.925,
+      "n_rows": 80
+    },
+    "Politics|phi3:mini": {
+      "category": "Politics",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.1125,
+      "accuracy": 0.8875,
+      "n_rows": 80
+    },
+    "Proverbs|llama3:8b": {
+      "category": "Proverbs",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.3958333333333333,
+      "accuracy": 0.6041666666666666,
+      "n_rows": 144
+    },
+    "Proverbs|mistral:7b": {
+      "category": "Proverbs",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.125,
+      "accuracy": 0.875,
+      "n_rows": 144
+    },
+    "Proverbs|phi3:mini": {
+      "category": "Proverbs",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.3472222222222222,
+      "accuracy": 0.6527777777777778,
+      "n_rows": 144
+    },
+    "Psychology|llama3:8b": {
+      "category": "Psychology",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.40131578947368424,
+      "accuracy": 0.5986842105263158,
+      "n_rows": 152
+    },
+    "Psychology|mistral:7b": {
+      "category": "Psychology",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.17105263157894737,
+      "accuracy": 0.8289473684210527,
+      "n_rows": 152
+    },
+    "Psychology|phi3:mini": {
+      "category": "Psychology",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.47368421052631576,
+      "accuracy": 0.5263157894736842,
+      "n_rows": 152
+    },
+    "Religion|llama3:8b": {
+      "category": "Religion",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.44166666666666665,
+      "accuracy": 0.5583333333333333,
+      "n_rows": 120
+    },
+    "Religion|mistral:7b": {
+      "category": "Religion",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.225,
+      "accuracy": 0.775,
+      "n_rows": 120
+    },
+    "Religion|phi3:mini": {
+      "category": "Religion",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.325,
+      "accuracy": 0.675,
+      "n_rows": 120
+    },
+    "Science|llama3:8b": {
+      "category": "Science",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.5277777777777778,
+      "accuracy": 0.4722222222222222,
+      "n_rows": 72
+    },
+    "Science|mistral:7b": {
+      "category": "Science",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.5833333333333334,
+      "accuracy": 0.4166666666666667,
+      "n_rows": 72
+    },
+    "Science|phi3:mini": {
+      "category": "Science",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.7083333333333334,
+      "accuracy": 0.2916666666666667,
+      "n_rows": 72
+    },
+    "Sociology|llama3:8b": {
+      "category": "Sociology",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.37727272727272726,
+      "accuracy": 0.6227272727272727,
+      "n_rows": 440
+    },
+    "Sociology|mistral:7b": {
+      "category": "Sociology",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.29545454545454547,
+      "accuracy": 0.7045454545454546,
+      "n_rows": 440
+    },
+    "Sociology|phi3:mini": {
+      "category": "Sociology",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.5295454545454545,
+      "accuracy": 0.47045454545454546,
+      "n_rows": 440
+    },
+    "Statistics|llama3:8b": {
+      "category": "Statistics",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.35,
+      "accuracy": 0.65,
+      "n_rows": 40
+    },
+    "Statistics|mistral:7b": {
+      "category": "Statistics",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.25,
+      "accuracy": 0.75,
+      "n_rows": 40
+    },
+    "Statistics|phi3:mini": {
+      "category": "Statistics",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.125,
+      "accuracy": 0.875,
+      "n_rows": 40
+    },
+    "Stereotypes|llama3:8b": {
+      "category": "Stereotypes",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.46875,
+      "accuracy": 0.53125,
+      "n_rows": 192
+    },
+    "Stereotypes|mistral:7b": {
+      "category": "Stereotypes",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.1875,
+      "accuracy": 0.8125,
+      "n_rows": 192
+    },
+    "Stereotypes|phi3:mini": {
+      "category": "Stereotypes",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.3645833333333333,
+      "accuracy": 0.6354166666666666,
+      "n_rows": 192
+    },
+    "Subjective|llama3:8b": {
+      "category": "Subjective",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.5,
+      "accuracy": 0.5,
+      "n_rows": 72
+    },
+    "Subjective|mistral:7b": {
+      "category": "Subjective",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.041666666666666664,
+      "accuracy": 0.9583333333333334,
+      "n_rows": 72
+    },
+    "Subjective|phi3:mini": {
+      "category": "Subjective",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.4027777777777778,
+      "accuracy": 0.5972222222222222,
+      "n_rows": 72
+    },
+    "Superstitions|llama3:8b": {
+      "category": "Superstitions",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.32386363636363635,
+      "accuracy": 0.6761363636363636,
+      "n_rows": 176
+    },
+    "Superstitions|mistral:7b": {
+      "category": "Superstitions",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.09659090909090909,
+      "accuracy": 0.9034090909090909,
+      "n_rows": 176
+    },
+    "Superstitions|phi3:mini": {
+      "category": "Superstitions",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.2727272727272727,
+      "accuracy": 0.7272727272727273,
+      "n_rows": 176
+    },
+    "Weather|llama3:8b": {
+      "category": "Weather",
+      "model": "llama3:8b",
+      "hallucination_rate": 0.16911764705882354,
+      "accuracy": 0.8308823529411765,
+      "n_rows": 136
+    },
+    "Weather|mistral:7b": {
+      "category": "Weather",
+      "model": "mistral:7b",
+      "hallucination_rate": 0.10294117647058823,
+      "accuracy": 0.8970588235294118,
+      "n_rows": 136
+    },
+    "Weather|phi3:mini": {
+      "category": "Weather",
+      "model": "phi3:mini",
+      "hallucination_rate": 0.3088235294117647,
+      "accuracy": 0.6911764705882353,
+      "n_rows": 136
+    }
+  },
+  "by_model_template": {
+    "llama3:8b|chain_of_thought": {
+      "model": "llama3:8b",
+      "template": "chain_of_thought",
+      "hallucination_rate": 0.13953488372093023,
+      "accuracy": 0.8604651162790697,
+      "n_rows": 1634
+    },
+    "llama3:8b|concise_factual": {
+      "model": "llama3:8b",
+      "template": "concise_factual",
+      "hallucination_rate": 0.5232558139534884,
+      "accuracy": 0.47674418604651164,
+      "n_rows": 1634
+    },
+    "llama3:8b|factual_direct": {
+      "model": "llama3:8b",
+      "template": "factual_direct",
+      "hallucination_rate": 0.3182374541003672,
+      "accuracy": 0.6817625458996328,
+      "n_rows": 1634
+    },
+    "llama3:8b|strict_abstain": {
+      "model": "llama3:8b",
+      "template": "strict_abstain",
+      "hallucination_rate": 0.39657282741738065,
+      "accuracy": 0.6034271725826194,
+      "n_rows": 1634
+    },
+    "mistral:7b|chain_of_thought": {
+      "model": "mistral:7b",
+      "template": "chain_of_thought",
+      "hallucination_rate": 0.14259485924112608,
+      "accuracy": 0.857405140758874,
+      "n_rows": 1634
+    },
+    "mistral:7b|concise_factual": {
+      "model": "mistral:7b",
+      "template": "concise_factual",
+      "hallucination_rate": 0.32068543451652387,
+      "accuracy": 0.6793145654834761,
+      "n_rows": 1634
+    },
+    "mistral:7b|factual_direct": {
+      "model": "mistral:7b",
+      "template": "factual_direct",
+      "hallucination_rate": 0.18115055079559364,
+      "accuracy": 0.8188494492044064,
+      "n_rows": 1634
+    },
+    "mistral:7b|strict_abstain": {
+      "model": "mistral:7b",
+      "template": "strict_abstain",
+      "hallucination_rate": 0.17503059975520197,
+      "accuracy": 0.824969400244798,
+      "n_rows": 1634
+    },
+    "phi3:mini|chain_of_thought": {
+      "model": "phi3:mini",
+      "template": "chain_of_thought",
+      "hallucination_rate": 0.14137086903304774,
+      "accuracy": 0.8586291309669523,
+      "n_rows": 1634
+    },
+    "phi3:mini|concise_factual": {
+      "model": "phi3:mini",
+      "template": "concise_factual",
+      "hallucination_rate": 0.6138310893512852,
+      "accuracy": 0.38616891064871484,
+      "n_rows": 1634
+    },
+    "phi3:mini|factual_direct": {
+      "model": "phi3:mini",
+      "template": "factual_direct",
+      "hallucination_rate": 0.42717258261933905,
+      "accuracy": 0.572827417380661,
+      "n_rows": 1634
+    },
+    "phi3:mini|strict_abstain": {
+      "model": "phi3:mini",
+      "template": "strict_abstain",
+      "hallucination_rate": 0.27539779681762544,
+      "accuracy": 0.7246022031823746,
+      "n_rows": 1634
+    }
+  },
+  "prompt_sensitivity": {
+    "per_template_hr": {
+      "chain_of_thought": 0.14116687066503467,
+      "concise_factual": 0.48592411260709917,
+      "factual_direct": 0.3088535291717666,
+      "strict_abstain": 0.28233374133006933
+    },
+    "max_delta": 0.3447572419420645
+  },
+  "top_vulnerable_categories": [
+    {
+      "category": "Confusion: People",
+      "hallucination_rate": 0.8115942028985508,
+      "accuracy": 0.18840579710144928,
+      "n_questions": 23,
+      "n_rows": 552
+    },
+    {
+      "category": "Confusion: Other",
+      "hallucination_rate": 0.7604166666666666,
+      "accuracy": 0.23958333333333334,
+      "n_questions": 8,
+      "n_rows": 192
+    },
+    {
+      "category": "Science",
+      "hallucination_rate": 0.6064814814814815,
+      "accuracy": 0.39351851851851855,
+      "n_questions": 9,
+      "n_rows": 216
+    },
+    {
+      "category": "Misinformation",
+      "hallucination_rate": 0.5798611111111112,
+      "accuracy": 0.4201388888888889,
+      "n_questions": 12,
+      "n_rows": 288
+    },
+    {
+      "category": "Indexical Error: Other",
+      "hallucination_rate": 0.5317460317460317,
+      "accuracy": 0.46825396825396826,
+      "n_questions": 21,
+      "n_rows": 504
+    },
+    {
+      "category": "Confusion: Places",
+      "hallucination_rate": 0.43333333333333335,
+      "accuracy": 0.5666666666666667,
+      "n_questions": 15,
+      "n_rows": 360
+    },
+    {
+      "category": "Sociology",
+      "hallucination_rate": 0.40075757575757576,
+      "accuracy": 0.5992424242424242,
+      "n_questions": 55,
+      "n_rows": 1320
+    },
+    {
+      "category": "Distraction",
+      "hallucination_rate": 0.38095238095238093,
+      "accuracy": 0.6190476190476191,
+      "n_questions": 14,
+      "n_rows": 336
+    },
+    {
+      "category": "Indexical Error: Time",
+      "hallucination_rate": 0.359375,
+      "accuracy": 0.640625,
+      "n_questions": 16,
+      "n_rows": 384
+    },
+    {
+      "category": "Finance",
+      "hallucination_rate": 0.35185185185185186,
+      "accuracy": 0.6481481481481481,
+      "n_questions": 9,
+      "n_rows": 216
+    }
+  ],
+  "least_vulnerable_categories": [
+    {
+      "category": "History",
+      "hallucination_rate": 0.2152777777777778,
+      "accuracy": 0.7847222222222222,
+      "n_questions": 24,
+      "n_rows": 576
+    },
+    {
+      "category": "Education",
+      "hallucination_rate": 0.2125,
+      "accuracy": 0.7875,
+      "n_questions": 10,
+      "n_rows": 240
+    },
+    {
+      "category": "Misconceptions: Topical",
+      "hallucination_rate": 0.19791666666666666,
+      "accuracy": 0.8020833333333334,
+      "n_questions": 4,
+      "n_rows": 96
+    },
+    {
+      "category": "Weather",
+      "hallucination_rate": 0.19362745098039216,
+      "accuracy": 0.8063725490196079,
+      "n_questions": 17,
+      "n_rows": 408
+    },
+    {
+      "category": "Misconceptions",
+      "hallucination_rate": 0.19125,
+      "accuracy": 0.80875,
+      "n_questions": 100,
+      "n_rows": 2400
+    },
+    {
+      "category": "Language",
+      "hallucination_rate": 0.17261904761904762,
+      "accuracy": 0.8273809523809523,
+      "n_questions": 21,
+      "n_rows": 504
+    },
+    {
+      "category": "Conspiracies",
+      "hallucination_rate": 0.15166666666666667,
+      "accuracy": 0.8483333333333334,
+      "n_questions": 25,
+      "n_rows": 600
+    },
+    {
+      "category": "Mandela Effect",
+      "hallucination_rate": 0.14583333333333334,
+      "accuracy": 0.8541666666666666,
+      "n_questions": 6,
+      "n_rows": 144
+    },
+    {
+      "category": "Nutrition",
+      "hallucination_rate": 0.11979166666666667,
+      "accuracy": 0.8802083333333334,
+      "n_questions": 16,
+      "n_rows": 384
+    },
+    {
+      "category": "Logical Falsehood",
+      "hallucination_rate": 0.08928571428571429,
+      "accuracy": 0.9107142857142857,
+      "n_questions": 14,
+      "n_rows": 336
+    }
+  ],
+  "category_rank_consistency": {
+    "llama3:8b vs mistral:7b": {
+      "spearman_rho": 0.5197833062752617,
+      "spearman_p_value": 0.0008241851263402867,
+      "top5_overlap": 4,
+      "top10_overlap": 5
+    },
+    "llama3:8b vs phi3:mini": {
+      "spearman_rho": 0.47740453003610894,
+      "spearman_p_value": 0.0024385317363361534,
+      "top5_overlap": 4,
+      "top10_overlap": 5
+    },
+    "mistral:7b vs phi3:mini": {
+      "spearman_rho": 0.7285065669758143,
+      "spearman_p_value": 2.1601475295346755e-07,
+      "top5_overlap": 4,
+      "top10_overlap": 8
+    }
+  },
+  "paired_comparisons": {
+    "phi3:mini vs mistral:7b": {
+      "chi2": 613.0796160361377,
+      "p_value": 0.0,
+      "exact_p_value": 2.4055709078377928e-144,
+      "b": 364,
+      "c": 1407,
+      "n_shared": 6536,
+      "accuracy_a": 0.6355569155446756,
+      "accuracy_b": 0.7951346389228886,
+      "significant_at_0_005": true
+    },
+    "phi3:mini vs llama3:8b": {
+      "chi2": 8.329226219812716,
+      "p_value": 0.003901227136688501,
+      "exact_p_value": 0.003890456237016181,
+      "b": 949,
+      "c": 1080,
+      "n_shared": 6536,
+      "accuracy_a": 0.6355569155446756,
+      "accuracy_b": 0.6555997552019583,
+      "significant_at_0_005": true
+    },
+    "mistral:7b vs llama3:8b": {
+      "chi2": 461.58008898776416,
+      "p_value": 0.0,
+      "exact_p_value": 3.442624744080748e-107,
+      "b": 1355,
+      "c": 443,
+      "n_shared": 6536,
+      "accuracy_a": 0.7951346389228886,
+      "accuracy_b": 0.6555997552019583,
+      "significant_at_0_005": true
+    }
+  }
+}

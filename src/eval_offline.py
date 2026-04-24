@@ -11,30 +11,7 @@ from scipy import stats
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-
-
-def parse_answer_list(raw):
-    if pd.isna(raw) or not raw:
-        return []
-    raw_str = str(raw).strip()
-    # Numpy array string format: ['answer one' 'answer two'] (space-separated quoted strings, no commas)
-    # Must try this BEFORE ast.literal_eval — Python silently concatenates adjacent string literals
-    # inside a list, so ast.literal_eval(['a' 'b']) returns ['ab'] instead of ['a', 'b'].
-    if raw_str.startswith("[") and "', '" not in raw_str and '", "' not in raw_str:
-        matches = re.findall("'([^']+)'", raw_str)
-        if len(matches) > 1:
-            return [m.strip() for m in matches if m.strip()]
-    # Standard comma-separated Python list
-    try:
-        result = ast.literal_eval(raw_str)
-        if isinstance(result, (list, tuple)):
-            return [str(s).strip() for s in result if str(s).strip()]
-    except Exception:
-        pass
-    # Fallback: semicolon-separated
-    return [s.strip() for s in raw_str.split(";") if s.strip()]
-
-
+WORD_OVERLAP_THRESHOLD = 0.3
 STOPWORDS = {
     "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
     "have", "has", "had", "do", "does", "did", "will", "would", "could",
@@ -45,7 +22,23 @@ STOPWORDS = {
     "more", "also", "up", "out", "so", "what", "which", "who", "when",
     "where", "how", "why", "all", "both", "each", "few", "some", "any",
 }
-WORD_OVERLAP_THRESHOLD = 0.3   # fraction of reference content words that must appear in output
+
+
+def parse_answer_list(raw):
+    if pd.isna(raw) or not raw:
+        return []
+    raw_str = str(raw).strip()
+    if raw_str.startswith("[") and "', '" not in raw_str and '", "' not in raw_str:
+        matches = re.findall(r"'([^']+)'", raw_str)
+        if len(matches) > 1:
+            return [match.strip() for match in matches if match.strip()]
+    try:
+        parsed = ast.literal_eval(raw_str)
+        if isinstance(parsed, (list, tuple)):
+            return [str(item).strip() for item in parsed if str(item).strip()]
+    except Exception:
+        pass
+    return [s.strip() for s in raw_str.split(";") if s.strip()]
 
 
 def normalize(text):
@@ -54,16 +47,15 @@ def normalize(text):
 
 def content_words(text):
     words = re.findall(r"[a-z0-9]+", normalize(text))
-    return [w for w in words if w not in STOPWORDS]
+    return [word for word in words if word not in STOPWORDS]
 
 
 def word_overlap(reference, output_text):
-    """Fraction of content words in reference that appear in output_text."""
     ref_words = content_words(reference)
     if not ref_words:
         return 0.0
-    out_words = set(content_words(output_text))
-    return sum(1 for w in ref_words if w in out_words) / len(ref_words)
+    output_words = set(content_words(output_text))
+    return sum(1 for word in ref_words if word in output_words) / len(ref_words)
 
 
 def judge_row(row):
@@ -77,15 +69,11 @@ def judge_row(row):
         return ("unfaithful" if has_correct else "faithful",
                 "incorrect" if has_correct else "correct")
 
-    # Incorrect answer check — exact substring match (these are specific wrong facts)
     for inc in incorrect_list:
-        ninc = normalize(inc)
-        if ninc in output or output in ninc:
+        if normalize(inc) in output or output in normalize(inc):
             return "unfaithful", "incorrect"
 
-    # Correct answer check — word overlap (handles paraphrasing)
-    all_correct = correct_list + ([best] if best else [])
-    for cor in all_correct:
+    for cor in correct_list + ([best] if best else []):
         if word_overlap(cor, output) >= WORD_OVERLAP_THRESHOLD:
             return "faithful", "correct"
 
@@ -123,24 +111,22 @@ def output_consistency(group):
 
 
 def main():
-    # Prefer the full study file; fall back to round2 for local testing
-    full_path = DATA_DIR / "experiment_results.csv"
-    r2_path   = DATA_DIR / "round2_results.csv"
-
+    full_path = DATA_DIR / "experiment_results_latest_19608.csv"
+    fallback_full_path = DATA_DIR / "experiment_results.csv"
+    r2_path = DATA_DIR / "round2_results.csv"
     if full_path.exists():
-        in_path  = full_path
-        out_path = DATA_DIR / "evaluated_results.csv"
-    elif r2_path.exists():
-        in_path  = r2_path
-        out_path = DATA_DIR / "evaluated_results_round2.csv"
+        input_path = full_path
+        scored_path = DATA_DIR / "evaluated_results_worddet_latest_19608.csv"
+    elif fallback_full_path.exists():
+        input_path = fallback_full_path
+        scored_path = DATA_DIR / "evaluated_results.csv"
     else:
-        print("ERROR: neither experiment_results.csv nor round2_results.csv found in data/")
-        print("Download experiment_results.csv from Google Drive and place it in data/")
-        return
+        input_path = r2_path
+        scored_path = DATA_DIR / "evaluated_results_round2.csv"
 
-    df = pd.read_csv(in_path)
-    print(f"Loaded {len(df)} rows from {in_path}")
-    print("Scoring deterministically (no LLM judge)...")
+    df = pd.read_csv(input_path)
+    print(f"Loaded {len(df)} rows from {input_path}")
+    print("Scoring deterministically with word-overlap reference matching...")
 
     results = df.apply(judge_row, axis=1, result_type="expand")
     df["faithfulness"] = results[0]
@@ -148,8 +134,8 @@ def main():
     df["hallucinated"] = (df["faithfulness"] == "unfaithful").astype(int)
     df["accurate"] = (df["correctness"] == "correct").astype(int)
 
-    df.to_csv(out_path, index=False)
-    print(f"Scored results saved to {out_path}")
+    df.to_csv(scored_path, index=False)
+    print(f"Scored results saved to {scored_path}")
 
     metrics = {}
 
